@@ -26,12 +26,12 @@ public class ActualRequestHandler implements RequestHandler {
 		String origin = checkOriginHeader(request, config);
 
 		if (config.isCredentialsSupported()) {
-			response.setHeader(CorsHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
+			response.setHeader(CorsHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS_HEADER, "true");
 		}
 
 		if (config.hasNotSimpleResponseHeadersExposed()) {
 			for(String exposedHeader : config.getExposedHeaders()) {
-				response.addHeader(CorsHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, exposedHeader);
+				response.addHeader(CorsHeaders.ACCESS_CONTROL_EXPOSE_HEADERS_HEADER, exposedHeader);
 			}
 		}
 

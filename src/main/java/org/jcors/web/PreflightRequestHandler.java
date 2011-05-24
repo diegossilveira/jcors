@@ -32,19 +32,19 @@ public class PreflightRequestHandler implements RequestHandler {
 		List<String> requestHeaders = checkRequestHeaders(request, config);
 
 		if (config.isCredentialsSupported()) {
-			response.setHeader(CorsHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
+			response.setHeader(CorsHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS_HEADER, "true");
 		}
 
 		if (config.isPreflightResultCacheEnabled()) {
-			response.setHeader(CorsHeaders.ACCESS_CONTROL_MAX_AGE, String.valueOf(config.getPreflightResultCacheMaxAge()));
+			response.setHeader(CorsHeaders.ACCESS_CONTROL_MAX_AGE_HEADER, String.valueOf(config.getPreflightResultCacheMaxAge()));
 		}
 		
 		for(String method : config.getAllowedMethods(requestMethod)) {
-			response.addHeader(CorsHeaders.ACCESS_CONTROL_ALLOW_METHODS, method);
+			response.addHeader(CorsHeaders.ACCESS_CONTROL_ALLOW_METHODS_HEADER, method);
 		}
 		
 		for(String header : config.getAllowedHeaders(requestHeaders)) {
-			response.addHeader(CorsHeaders.ACCESS_CONTROL_ALLOW_HEADERS, header);
+			response.addHeader(CorsHeaders.ACCESS_CONTROL_ALLOW_HEADERS_HEADER, header);
 		}
 
 		response.setHeader(CorsHeaders.ACCESS_CONTROL_ALLOW_ORIGIN_HEADER, origin);
@@ -79,7 +79,7 @@ public class PreflightRequestHandler implements RequestHandler {
 	//TODO: parse and validate the method
 	private String checkRequestMethod(HttpServletRequest request, JCorsConfiguration config) {
 
-		String requestMethod = request.getHeader(CorsHeaders.ACCESS_CONTROL_REQUEST_METHOD);
+		String requestMethod = request.getHeader(CorsHeaders.ACCESS_CONTROL_REQUEST_METHOD_HEADER);
 		Constraint.ensureNotEmpty(requestMethod, "Request Method Header must be supplied");
 
 		Constraint.ensureTrue(config.isMethodAllowed(requestMethod),
@@ -98,7 +98,7 @@ public class PreflightRequestHandler implements RequestHandler {
 	private List<String> checkRequestHeaders(HttpServletRequest request, JCorsConfiguration config) {
 
 		@SuppressWarnings("unchecked")
-		Enumeration<String> requestHeadersHeaders = request.getHeaders(CorsHeaders.ACCESS_CONTROL_REQUEST_HEADERS);
+		Enumeration<String> requestHeadersHeaders = request.getHeaders(CorsHeaders.ACCESS_CONTROL_REQUEST_HEADERS_HEADER);
 
 		List<String> requestHeaders = new ArrayList<String>();
 		
