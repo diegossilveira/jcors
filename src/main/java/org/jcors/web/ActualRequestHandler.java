@@ -47,7 +47,7 @@ public class ActualRequestHandler implements RequestHandler {
 	private String checkOriginHeader(HttpServletRequest request, JCorsConfiguration config) {
 
 		String originHeader = request.getHeader(CorsHeaders.ORIGIN_HEADER);
-		Constraint.ensureNotNull(originHeader, "Cross-Origin requests must specify an Origin Header");
+		Constraint.ensureNotEmpty(originHeader, "Cross-Origin requests must specify an Origin Header");
 
 		String[] origins = originHeader.split(" ");
 
