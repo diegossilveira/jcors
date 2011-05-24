@@ -8,13 +8,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.jcors.config.JCorsConfiguration;
 import org.jcors.model.CorsHeaders;
+import org.jcors.util.Constraint;
 
 /**
  * Specialized handler for Simple Cross-Origin Requests (aka Actual Requests)
  * 
  * @author Diego Silveira
  */
-public class ActualRequestHandler extends AbstractCorsRequestHandler {
+public class ActualRequestHandler implements RequestHandler {
 
 	/**
 	 * @see RequestHandler.handle
@@ -22,17 +23,39 @@ public class ActualRequestHandler extends AbstractCorsRequestHandler {
 	public void handle(HttpServletRequest request, HttpServletResponse response, JCorsConfiguration config) throws IOException,
 			ServletException {
 
-		super.handle(request, response, config);
+		String origin = checkOriginHeader(request, config);
 
-		if(config.isCredentialsSupported()) {
+		if (config.isCredentialsSupported()) {
 			response.setHeader(CorsHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
 		}
-		
-		if(config.hasNotSimpleResponseHeadersExposed()) {
-			response.setHeader(CorsHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, config.getExposedHeaders());
+
+		if (config.hasNotSimpleResponseHeadersExposed()) {
+			for(String exposedHeader : config.getExposedHeaders()) {
+				response.addHeader(CorsHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, exposedHeader);
+			}
 		}
 
-		response.setHeader(CorsHeaders.ACCESS_CONTROL_ALLOW_ORIGIN_HEADER, request.getHeader(CorsHeaders.ORIGIN_HEADER));
+		response.setHeader(CorsHeaders.ACCESS_CONTROL_ALLOW_ORIGIN_HEADER, origin);
+	}
+
+	/**
+	 * Checks if the origin is allowed
+	 * 
+	 * @param request
+	 * @param config
+	 */
+	private String checkOriginHeader(HttpServletRequest request, JCorsConfiguration config) {
+
+		String originHeader = request.getHeader(CorsHeaders.ORIGIN_HEADER);
+		Constraint.ensureNotNull(originHeader, "Cross-Origin requests must specify an Origin Header");
+
+		String[] origins = originHeader.split(" ");
+
+		for (String origin : origins) {
+			Constraint.ensureTrue(config.isOriginAllowed(origin), String.format("The specified origin is not allowed: '%s'", origin));
+		}
+
+		return originHeader;
 	}
 
 }
