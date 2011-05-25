@@ -36,7 +36,7 @@ public final class RequestHandlerFactory {
 	private static boolean isEmptyHeader(HttpServletRequest request, String header) {
 		
 		String headerValue = request.getHeader(header);
-		return headerValue != null && "".equals(headerValue.trim());
+		return headerValue == null || "".equals(headerValue.trim());
 	}
 	
 }
