@@ -9,7 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jcors.config.JCorsConfiguration;
+import org.jcors.config.JCorsConfig;
 import org.jcors.model.CorsHeaders;
 import org.jcors.util.Constraint;
 
@@ -23,7 +23,7 @@ public class PreflightRequestHandler implements RequestHandler {
 	/**
 	 * @see RequestHandler.handle
 	 */
-	public void handle(HttpServletRequest request, HttpServletResponse response, JCorsConfiguration config) throws IOException,
+	public void handle(HttpServletRequest request, HttpServletResponse response, JCorsConfig config) throws IOException,
 			ServletException {
 
 		// Security Checks
@@ -56,7 +56,7 @@ public class PreflightRequestHandler implements RequestHandler {
 	 * @param request
 	 * @param config
 	 */
-	private String checkOriginHeader(HttpServletRequest request, JCorsConfiguration config) {
+	private String checkOriginHeader(HttpServletRequest request, JCorsConfig config) {
 
 		String originHeader = request.getHeader(CorsHeaders.ORIGIN_HEADER);
 		Constraint.ensureNotEmpty(originHeader, "Cross-Origin requests must specify an Origin Header");
@@ -77,7 +77,7 @@ public class PreflightRequestHandler implements RequestHandler {
 	 * @param config
 	 */
 	//TODO: parse and validate the method
-	private String checkRequestMethod(HttpServletRequest request, JCorsConfiguration config) {
+	private String checkRequestMethod(HttpServletRequest request, JCorsConfig config) {
 
 		String requestMethod = request.getHeader(CorsHeaders.ACCESS_CONTROL_REQUEST_METHOD_HEADER);
 		Constraint.ensureNotEmpty(requestMethod, "Request Method Header must be supplied");
@@ -95,7 +95,7 @@ public class PreflightRequestHandler implements RequestHandler {
 	 * @param config
 	 */
 	//TODO: parse and validate the headers
-	private List<String> checkRequestHeaders(HttpServletRequest request, JCorsConfiguration config) {
+	private List<String> checkRequestHeaders(HttpServletRequest request, JCorsConfig config) {
 
 		@SuppressWarnings("unchecked")
 		Enumeration<String> requestHeadersHeaders = request.getHeaders(CorsHeaders.ACCESS_CONTROL_REQUEST_HEADERS_HEADER);

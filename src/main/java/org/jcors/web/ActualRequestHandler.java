@@ -6,7 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jcors.config.JCorsConfiguration;
+import org.jcors.config.JCorsConfig;
 import org.jcors.model.CorsHeaders;
 import org.jcors.util.Constraint;
 
@@ -20,7 +20,7 @@ public class ActualRequestHandler implements RequestHandler {
 	/**
 	 * @see RequestHandler.handle
 	 */
-	public void handle(HttpServletRequest request, HttpServletResponse response, JCorsConfiguration config) throws IOException,
+	public void handle(HttpServletRequest request, HttpServletResponse response, JCorsConfig config) throws IOException,
 			ServletException {
 
 		String origin = checkOriginHeader(request, config);
@@ -44,7 +44,7 @@ public class ActualRequestHandler implements RequestHandler {
 	 * @param request
 	 * @param config
 	 */
-	private String checkOriginHeader(HttpServletRequest request, JCorsConfiguration config) {
+	private String checkOriginHeader(HttpServletRequest request, JCorsConfig config) {
 
 		String originHeader = request.getHeader(CorsHeaders.ORIGIN_HEADER);
 		Constraint.ensureNotEmpty(originHeader, "Cross-Origin requests must specify an Origin Header");

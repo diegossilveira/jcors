@@ -6,7 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jcors.config.JCorsConfiguration;
+import org.jcors.config.JCorsConfig;
 
 /**
  * Interface for a CORS RequestHandler
@@ -23,6 +23,6 @@ public interface RequestHandler {
 	 * @throws IOException
 	 * @throws ServletException
 	 */
-	void handle(HttpServletRequest request, HttpServletResponse response, JCorsConfiguration config) throws IOException, ServletException;
+	void handle(HttpServletRequest request, HttpServletResponse response, JCorsConfig config) throws IOException, ServletException;
 
 }
