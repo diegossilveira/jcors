@@ -1,4 +1,4 @@
-package org.jcors.web.filter;
+package org.jcors.web;
 
 import java.io.IOException;
 
@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.jcors.config.JCorsConfiguration;
-import org.jcors.web.RequestHandler;
-import org.jcors.web.RequestHandlerFactory;
 
 /**
  * Main application filter, responsible for enabling CORS Requests handling
