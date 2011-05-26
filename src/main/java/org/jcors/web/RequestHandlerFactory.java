@@ -20,16 +20,16 @@ public final class RequestHandlerFactory {
 		if(!isEmptyHeader(request, CorsHeaders.ORIGIN_HEADER)) {
 			
 			if(!isEmptyHeader(request, CorsHeaders.ACCESS_CONTROL_REQUEST_METHOD_HEADER)) {
-				log.info("Handling preflight request");
+				log.debug("Handling preflight request");
 				return new PreflightRequestHandler();
 			}
 			
-			log.info("Handling actual request");
+			log.debug("Handling actual request");
 			return new ActualRequestHandler();
 			
 		}
 		
-		log.info("Handling non-CORS request");
+		log.debug("Handling non-CORS request");
 		return new SimpleRequestHandler();
 	}
 	
