@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.jcors.config.JCorsConfiguration;
+import org.jcors.config.ConfigLoader;
+import org.jcors.config.JCorsConfig;
 
 /**
  * Main application filter, responsible for enabling CORS Requests handling
@@ -23,11 +24,11 @@ public class CorsEnablingFilter implements Filter {
 
 	private final Logger log = Logger.getLogger(CorsEnablingFilter.class);
 	
-	private JCorsConfiguration config;
+	private JCorsConfig config;
 
 	public void init(FilterConfig config) throws ServletException {
-		//TODO: parse XML configuration file, if existing in classpath
-		this.config = new JCorsConfiguration();
+		
+		this.config = ConfigLoader.load();
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -42,8 +43,9 @@ public class CorsEnablingFilter implements Filter {
 			
 		} catch(Exception ex) {
 			
-			log.error("Error while handling a request");
-			throw new ServletException(ex.getMessage(), ex);
+			log.error("Error while handling a request", ex);
+			httpResponse.sendError(HttpServletResponse.SC_BAD_REQUEST, ex.getMessage());
+			return;
 		}
 		
 		chain.doFilter(request, response);
