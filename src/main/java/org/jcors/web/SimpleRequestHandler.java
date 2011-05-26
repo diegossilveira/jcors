@@ -6,7 +6,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jcors.config.JCorsConfiguration;
+import org.jcors.config.JCorsConfig;
+import org.jcors.util.Constraint;
 
 /**
  * Specialized handler for Preflight Requests
@@ -18,10 +19,10 @@ public class SimpleRequestHandler implements RequestHandler {
 	/**
 	 * @see RequestHandler.handle
 	 */
-	public void handle(HttpServletRequest request, HttpServletResponse response, JCorsConfiguration config) throws IOException,
+	public void handle(HttpServletRequest request, HttpServletResponse response, JCorsConfig config) throws IOException,
 			ServletException {
 		
-		// nothing to do
+		Constraint.ensureTrue(config.isNonCorsRequestsEnabled(), "Non-CORS requests are disabled");
 	}
 
 	
