@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:c="http://jcors.org/config" targetNamespace="http://jcors.org/config"
+	elementFormDefault="qualified">
+
+	<!-- Simple Types -->
+	<xs:simpleType name="methodType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CONNECT" />
+			<xs:enumeration value="DELETE" />
+			<xs:enumeration value="GET" />
+			<xs:enumeration value="HEAD" />
+			<xs:enumeration value="OPTIONS" />
+			<xs:enumeration value="POST" />
+			<xs:enumeration value="PUT" />
+			<xs:enumeration value="TRACE" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- Complex Elements -->
+	<xs:complexType name="allowedOriginsType">
+		<xs:sequence>
+			<xs:element name="origin" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="exposedHeadersType">
+		<xs:sequence>
+			<xs:element name="header" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="allowedHeadersType">
+		<xs:sequence>
+			<xs:element name="header" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="allowedMethodsType">
+		<xs:sequence>
+			<xs:element name="method" type="c:methodType" minOccurs="1"
+				maxOccurs="8" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="configurationType">
+		<xs:sequence>
+			<xs:element name="enableNonCorsRequests" type="xs:boolean"
+				default="true" minOccurs="0" maxOccurs="1" />
+			<xs:element name="resourcesSupportsCredentials" type="xs:boolean"
+				default="true" minOccurs="0" maxOccurs="1" />
+			<xs:element name="preflightResultCacheMaxAge" type="xs:integer"
+				default="0" minOccurs="0" maxOccurs="1" />
+			<xs:element name="allowedOrigins" type="c:allowedOriginsType"
+				minOccurs="0" maxOccurs="1" />
+			<xs:element name="allowedHeaders" type="c:allowedHeadersType"
+				minOccurs="0" maxOccurs="1" />
+			<xs:element name="allowedMethods" type="c:allowedMethodsType"
+				minOccurs="0" maxOccurs="1" />
+			<xs:element name="exposedHeaders" type="c:exposedHeadersType"
+				minOccurs="0" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<!-- Elements -->
+	<xs:element name="configuration" type="c:configurationType" />
+
+</xs:schema>

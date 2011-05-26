@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+*****************************************************************************************************
+- This is a sample JCors configuration file.
+- Just rename this to jcors.xml and put in your project's classpath.
+*****************************************************************************************************
+-->
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://jcors.org/config" xsi:schemaLocation="http://jcors.org/config/1.0 jcors-schema.xsd">
+
+	<!--
+	************************************************************************************************
+	- This is an *optional* tag.
+	- Used to define if non-CORS request handling is wanted.
+	- The default value is true
+	************************************************************************************************
+	-->
+	<enableNonCorsRequests>true</enableNonCorsRequests>
+	
+	<!--
+	************************************************************************************************
+	- This is an *optional* tag. 
+	- Used to define if web resources behind the filter support authentication.
+	- The default value is true
+	************************************************************************************************
+	-->
+	<resourcesSupportsCredentials>false</resourcesSupportsCredentials>
+	
+	<!--
+	************************************************************************************************
+	- This is an *optional* tag. 
+	- Configures the amount of seconds the user agent is allowed to cache the result of preflight 
+	- requests. A value of 0 disables the cache.
+	- The default value is 0 (cache disabled)
+	************************************************************************************************
+	-->
+	<preflightResultCacheMaxAge>300</preflightResultCacheMaxAge>
+
+	<!--
+	************************************************************************************************
+	- This is an *optional* tag. 
+	- Specifies the origin domains allowed by the resources.
+	- By default, any domain is allowed
+	************************************************************************************************
+	-->
+	<allowedOrigins>
+		<origin>http://mydomain.org</origin>
+	</allowedOrigins>
+
+	<!--
+	************************************************************************************************
+	- This is an *optional* tag. 
+	- Indicates which header field names can be used during actual requests.
+	- The default, any header is allowed
+	************************************************************************************************
+	-->
+	<allowedHeaders>
+		<header>My-Header</header>
+	</allowedHeaders>
+
+	<!--
+	************************************************************************************************
+	- This is an *optional* tag. 
+	- Indicates which HTTP methods can be used during actual requests.
+	- The default, any method is allowed
+	************************************************************************************************
+	-->
+	<allowedMethods>
+		<method>GET</method>
+		<method>PUT</method>
+		<method>POST</method>
+		<method>DELETE</method>
+	</allowedMethods>
+
+	<!--
+	************************************************************************************************
+	- This is an *optional* tag. 
+	- Indicates which headers are safe to expose to the API of a CORS API specification.
+	- The default, any method is allowed
+	************************************************************************************************
+	-->
+	<exposedHeaders>
+		<header>myheader</header>
+	</exposedHeaders>
+
+</configuration>
