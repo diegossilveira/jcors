@@ -4,11 +4,34 @@
 
 	<groupId>org.jcors</groupId>
 	<artifactId>jcors</artifactId>
-	<version>0.1</version>
+	<version>1.0</version>
 	<packaging>jar</packaging>
 
-	<name>jcors</name>
-	<url>http://maven.apache.org</url>
+	<name>JCors</name>
+	<description>Cross-Origin Resource Sharing for Java</description>
+	<url>https://github.com/diegossilveira/jcors</url>
+
+	<developers>
+		<developer>
+			<id>diegossilveira</id>
+			<name>Diego Silveira</name>
+			<email>diegossilveira@gmail.com</email>
+			<timezone>-3</timezone>
+		</developer>
+	</developers>
+
+	<licenses>
+		<license>
+			<name>MIT</name>
+			<url>https://github.com/diegossilveira/jcors/blob/master/LICENSE.txt</url>
+		</license>
+	</licenses>
+
+	<scm>
+		<connection>scm:http://github.com/diegossilveira/jcors.git</connection>
+		<developerConnection>scm:http://github.com/diegossilveira/jcors.git</developerConnection>
+		<url>http://github.com/diegossilveira/jcors.git</url>
+	</scm>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -40,4 +63,36 @@
 		</dependency>
 
 	</dependencies>
+
+	<build>
+		<plugins>
+		
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.2</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+		</plugins>
+	</build>
+
 </project>
