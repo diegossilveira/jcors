@@ -1,0 +1,50 @@
+h2. Welcome to the home of JCors
+
+JCors is a simple and flexible Java implementation of W3C CORS spec.
+See more details about CORS "here":http://www.w3.org/TR/cors/
+
+h3. CORS?
+
+CORS stands for Cross-Origin Resource Sharing and it's a new way to enable client-side cross-origin requests.
+Before CORS it was (almost) impossible to make Ajax requests to another domain because of 'Same Origin Policy' enforced by Javascript.
+Some newest browsers already implement CORS support in order to make cross-domain client-side requests possible without the need of using hacks (such JSON-P).
+
+h3. And what exactly is JCors?
+
+JCors is a small lib that provides a simple Servlet Filter that enables CORS request handling by existing Java resources. 
+These resources can be anything like webservices (REST / SOAP), Servlets, Struts Actions...
+
+h3. Using JCors
+
+Just add this to your __web.xml__ file:
+
+@<filter>@
+	@<filter-name>CorsFilter</filter-name>@
+	@<filter-class>org.jcors.web.CorsEnablingFilter</filter-class>@
+@</filter>@
+	
+@<filter-mapping>@
+	@<filter-name>CorsFilter</filter-name>@
+	@<url-pattern>/resource/*</url-pattern>@
+@</filter-mapping>@
+
+And optionally, add a file __jcors.xml__ to your classpath
+Check the __jcors-sample.xml__ "here":https://github.com/diegossilveira/jcors/blob/master/src/main/resources/jcors-sample.xml
+
+h3. And Maven?
+
+I'm looking forward to deploy JCors at Maven Central Repository. Stay tunned!
+
+h3. Help Me!
+
+There are some things to improve on this project, can you help me?
+
+ * Improve JUnit tests
+ * Servlet 3.0 API support
+ * Request Headers validation
+
+h3. About me
+
+Email me: diegossilveira at gmail.com
+
+Follow me: "@diegossilveira":http://twitter.com/diegossilveira
