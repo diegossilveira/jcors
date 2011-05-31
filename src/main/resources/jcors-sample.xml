@@ -51,7 +51,7 @@
 	************************************************************************************************
 	- This is an *optional* tag. 
 	- Indicates which header field names can be used during actual requests.
-	- The default, any header is allowed
+	- By default, any header is allowed
 	************************************************************************************************
 	-->
 	<allowedHeaders>
@@ -62,7 +62,7 @@
 	************************************************************************************************
 	- This is an *optional* tag. 
 	- Indicates which HTTP methods can be used during actual requests.
-	- The default, any method is allowed
+	- By default, any method is allowed
 	************************************************************************************************
 	-->
 	<allowedMethods>
@@ -76,7 +76,7 @@
 	************************************************************************************************
 	- This is an *optional* tag. 
 	- Indicates which headers are safe to expose to the API of a CORS API specification.
-	- The default, any method is allowed
+	- By default, no extra header is exposed
 	************************************************************************************************
 	-->
 	<exposedHeaders>

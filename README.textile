@@ -19,13 +19,13 @@ h3. Using JCors
 Just add this to your __web.xml__ file:
 
 @<filter>@
-	@<filter-name>CorsFilter</filter-name>@
-	@<filter-class>org.jcors.web.CorsEnablingFilter</filter-class>@
+   @<filter-name>CorsFilter</filter-name>@
+   @<filter-class>org.jcors.web.CorsEnablingFilter</filter-class>@
 @</filter>@
 	
 @<filter-mapping>@
-	@<filter-name>CorsFilter</filter-name>@
-	@<url-pattern>/resource/*</url-pattern>@
+   @<filter-name>CorsFilter</filter-name>@
+   @<url-pattern>/resource/*</url-pattern>@
 @</filter-mapping>@
 
 And optionally, add a file __jcors.xml__ to your classpath
@@ -33,7 +33,13 @@ Check the __jcors-sample.xml__ "here":https://github.com/diegossilveira/jcors/bl
 
 h3. And Maven?
 
-I'm looking forward to deploy JCors at Maven Central Repository. Stay tunned!
+Now you can get JCors from Maven Central Repository:
+
+@<dependency>@
+   @<groupId>org.jcors</groupId>@
+   @<artifactId>jcors </artifactId>@
+   @<version>1.0</version>@
+@</dependency>@
 
 h3. Help Me!
 
