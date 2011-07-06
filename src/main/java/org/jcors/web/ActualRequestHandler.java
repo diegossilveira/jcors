@@ -2,6 +2,7 @@ package org.jcors.web;
 
 import java.io.IOException;
 
+import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,8 +21,7 @@ public class ActualRequestHandler implements RequestHandler {
 	/**
 	 * @see RequestHandler.handle
 	 */
-	public void handle(HttpServletRequest request, HttpServletResponse response, JCorsConfig config) throws IOException,
-			ServletException {
+	public void handle(HttpServletRequest request, HttpServletResponse response, FilterChain chain, JCorsConfig config) throws IOException, ServletException {
 
 		String origin = checkOriginHeader(request, config);
 
@@ -30,12 +30,14 @@ public class ActualRequestHandler implements RequestHandler {
 		}
 
 		if (config.hasNotSimpleResponseHeadersExposed()) {
-			for(String exposedHeader : config.getExposedHeaders()) {
+			for (String exposedHeader : config.getExposedHeaders()) {
 				response.addHeader(CorsHeaders.ACCESS_CONTROL_EXPOSE_HEADERS_HEADER, exposedHeader);
 			}
 		}
 
 		response.setHeader(CorsHeaders.ACCESS_CONTROL_ALLOW_ORIGIN_HEADER, origin);
+		
+		chain.doFilter(request, response);
 	}
 
 	/**

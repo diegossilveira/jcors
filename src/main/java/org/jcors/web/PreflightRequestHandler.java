@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
+import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +24,7 @@ public class PreflightRequestHandler implements RequestHandler {
 	/**
 	 * @see RequestHandler.handle
 	 */
-	public void handle(HttpServletRequest request, HttpServletResponse response, JCorsConfig config) throws IOException,
+	public void handle(HttpServletRequest request, HttpServletResponse response, FilterChain chain, JCorsConfig config) throws IOException,
 			ServletException {
 
 		// Security Checks
@@ -38,12 +39,12 @@ public class PreflightRequestHandler implements RequestHandler {
 		if (config.isPreflightResultCacheEnabled()) {
 			response.setHeader(CorsHeaders.ACCESS_CONTROL_MAX_AGE_HEADER, String.valueOf(config.getPreflightResultCacheMaxAge()));
 		}
-		
-		for(String method : config.getAllowedMethods(requestMethod)) {
+
+		for (String method : config.getAllowedMethods(requestMethod)) {
 			response.addHeader(CorsHeaders.ACCESS_CONTROL_ALLOW_METHODS_HEADER, method);
 		}
-		
-		for(String header : config.getAllowedHeaders(requestHeaders)) {
+
+		for (String header : config.getAllowedHeaders(requestHeaders)) {
 			response.addHeader(CorsHeaders.ACCESS_CONTROL_ALLOW_HEADERS_HEADER, header);
 		}
 
@@ -66,7 +67,7 @@ public class PreflightRequestHandler implements RequestHandler {
 		for (String origin : origins) {
 			Constraint.ensureTrue(config.isOriginAllowed(origin), String.format("The specified origin is not allowed: '%s'", origin));
 		}
-		
+
 		return originHeader;
 	}
 
@@ -76,7 +77,7 @@ public class PreflightRequestHandler implements RequestHandler {
 	 * @param request
 	 * @param config
 	 */
-	//TODO: parse and validate the method
+	// TODO: parse and validate the method
 	private String checkRequestMethod(HttpServletRequest request, JCorsConfig config) {
 
 		String requestMethod = request.getHeader(CorsHeaders.ACCESS_CONTROL_REQUEST_METHOD_HEADER);
@@ -84,7 +85,7 @@ public class PreflightRequestHandler implements RequestHandler {
 
 		Constraint.ensureTrue(config.isMethodAllowed(requestMethod),
 				String.format("The specified method is not allowed: '%s'", requestMethod));
-		
+
 		return requestMethod;
 	}
 
@@ -94,21 +95,21 @@ public class PreflightRequestHandler implements RequestHandler {
 	 * @param request
 	 * @param config
 	 */
-	//TODO: parse and validate the headers
+	// TODO: parse and validate the headers
 	private List<String> checkRequestHeaders(HttpServletRequest request, JCorsConfig config) {
 
 		@SuppressWarnings("unchecked")
 		Enumeration<String> requestHeadersHeaders = request.getHeaders(CorsHeaders.ACCESS_CONTROL_REQUEST_HEADERS_HEADER);
 
 		List<String> requestHeaders = new ArrayList<String>();
-		
+
 		while (requestHeadersHeaders.hasMoreElements()) {
 			String requestHeader = (String) requestHeadersHeaders.nextElement();
 			Constraint.ensureTrue(config.isHeaderAllowed(requestHeader),
 					String.format("The specified header is not allowed: '%s'", requestHeader));
 			requestHeaders.add(requestHeader);
 		}
-		
+
 		return requestHeaders;
 	}
 

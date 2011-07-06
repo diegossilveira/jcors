@@ -2,6 +2,7 @@ package org.jcors.web;
 
 import java.io.IOException;
 
+import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,9 +21,12 @@ public interface RequestHandler {
 	 * 
 	 * @param request
 	 * @param response
+	 * @param chain
+	 * @param config
 	 * @throws IOException
 	 * @throws ServletException
 	 */
-	void handle(HttpServletRequest request, HttpServletResponse response, JCorsConfig config) throws IOException, ServletException;
+	void handle(HttpServletRequest request, HttpServletResponse response, FilterChain chain, JCorsConfig config) throws IOException,
+			ServletException;
 
 }
