@@ -39,7 +39,7 @@ public class CorsEnablingFilter implements Filter {
 		try {
 			
 			RequestHandler requestHandler = RequestHandlerFactory.getRequestHandler(httpRequest);
-			requestHandler.handle(httpRequest, httpResponse, config);
+			requestHandler.handle(httpRequest, httpResponse, chain, config);
 			
 		} catch(Exception ex) {
 			
@@ -47,9 +47,6 @@ public class CorsEnablingFilter implements Filter {
 			httpResponse.sendError(HttpServletResponse.SC_BAD_REQUEST, ex.getMessage());
 			return;
 		}
-		
-		chain.doFilter(request, response);
-
 	}
 
 	public void destroy() {
