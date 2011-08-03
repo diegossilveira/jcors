@@ -25,7 +25,7 @@ public class ActualRequestHandler implements RequestHandler {
 
 		String origin = checkOriginHeader(request, config);
 
-		if (config.isCredentialsSupported()) {
+		if (config.areCredentialsSupported()) {
 			response.setHeader(CorsHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS_HEADER, "true");
 		}
 

@@ -16,7 +16,7 @@ public final class JCorsConfig {
 
 	private boolean enableNonCorsRequests;
 
-	private boolean resourcesSupportsCredentials;
+	private boolean resourcesSupportCredentials;
 
 	private int preflightResultCacheMaxAge;
 
@@ -31,7 +31,7 @@ public final class JCorsConfig {
 	public JCorsConfig() {
 
 		enableNonCorsRequests = true;
-		resourcesSupportsCredentials = true;
+		resourcesSupportCredentials = true;
 		preflightResultCacheMaxAge = 0;
 		allowedOrigins = new HashSet<String>();
 		exposedHeaders = new HashSet<String>();
@@ -54,9 +54,9 @@ public final class JCorsConfig {
 	 * 
 	 * @return
 	 */
-	public boolean isCredentialsSupported() {
+	public boolean areCredentialsSupported() {
 
-		return resourcesSupportsCredentials;
+		return resourcesSupportCredentials;
 	}
 
 	/**
@@ -232,9 +232,9 @@ public final class JCorsConfig {
 	 * 
 	 * @param resourcesSupportsCredentials
 	 */
-	public void setResourcesSupportsCredentials(boolean resourcesSupportsCredentials) {
+	public void setResourcesSupportCredentials(boolean resourcesSupportCredentials) {
 
-		this.resourcesSupportsCredentials = resourcesSupportsCredentials;
+		this.resourcesSupportCredentials = resourcesSupportCredentials;
 	}
 
 	/**
@@ -256,7 +256,7 @@ public final class JCorsConfig {
 		builder.append(newLine);
 		builder.append("Enabling non-CORS requests: ").append(enableNonCorsRequests);
 		builder.append(newLine);
-		builder.append("Credentials Supported: ").append(resourcesSupportsCredentials);
+		builder.append("Credentials Supported: ").append(resourcesSupportCredentials);
 		builder.append(newLine);
 		builder.append("Preflight Requests max age: ").append(
 				isPreflightResultCacheEnabled() ? preflightResultCacheMaxAge : "cache disabled");

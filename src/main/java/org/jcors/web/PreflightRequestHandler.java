@@ -32,7 +32,7 @@ public class PreflightRequestHandler implements RequestHandler {
 		String requestMethod = checkRequestMethod(request, config);
 		List<String> requestHeaders = checkRequestHeaders(request, config);
 
-		if (config.isCredentialsSupported()) {
+		if (config.areCredentialsSupported()) {
 			response.setHeader(CorsHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS_HEADER, "true");
 		}
 

@@ -47,7 +47,7 @@
 		<xs:sequence>
 			<xs:element name="enableNonCorsRequests" type="xs:boolean"
 				default="true" minOccurs="0" maxOccurs="1" />
-			<xs:element name="resourcesSupportsCredentials" type="xs:boolean"
+			<xs:element name="resourcesSupportCredentials" type="xs:boolean"
 				default="true" minOccurs="0" maxOccurs="1" />
 			<xs:element name="preflightResultCacheMaxAge" type="xs:integer"
 				default="0" minOccurs="0" maxOccurs="1" />

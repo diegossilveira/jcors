@@ -21,7 +21,7 @@ class ConfigBuilder {
 	private Boolean enableNonCorsRequests;
 
 	@XmlElement(namespace = "http://jcors.org/config")
-	private Boolean resourcesSupportsCredentials;
+	private Boolean resourcesSupportCredentials;
 
 	@XmlElement(namespace = "http://jcors.org/config")
 	private Integer preflightResultCacheMaxAge;
@@ -55,8 +55,8 @@ class ConfigBuilder {
 			config.setEnableNonCorsRequests(enableNonCorsRequests);
 		}
 
-		if (resourcesSupportsCredentials != null) {
-			config.setResourcesSupportsCredentials(resourcesSupportsCredentials);
+		if (resourcesSupportCredentials != null) {
+			config.setResourcesSupportCredentials(resourcesSupportCredentials);
 		}
 
 		if (preflightResultCacheMaxAge != null) {
