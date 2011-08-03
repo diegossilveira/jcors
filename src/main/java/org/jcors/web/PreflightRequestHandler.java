@@ -77,7 +77,6 @@ public class PreflightRequestHandler implements RequestHandler {
 	 * @param request
 	 * @param config
 	 */
-	// TODO: parse and validate the method
 	private String checkRequestMethod(HttpServletRequest request, JCorsConfig config) {
 
 		String requestMethod = request.getHeader(CorsHeaders.ACCESS_CONTROL_REQUEST_METHOD_HEADER);

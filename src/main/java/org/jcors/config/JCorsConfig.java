@@ -1,6 +1,7 @@
 package org.jcors.config;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -85,7 +86,7 @@ public final class JCorsConfig {
 	 */
 	public Collection<String> getAllowedOrigins() {
 
-		return allowedOrigins;
+		return Collections.unmodifiableSet(allowedOrigins);
 	}
 
 	/**
@@ -139,7 +140,7 @@ public final class JCorsConfig {
 	 */
 	public Collection<String> getExposedHeaders() {
 
-		return exposedHeaders;
+		return Collections.unmodifiableSet(exposedHeaders);
 	}
 
 	/**
@@ -187,7 +188,7 @@ public final class JCorsConfig {
 	 */
 	public boolean isMethodAllowed(String method) {
 
-		return allowedMethods.isEmpty() || allowedMethods.contains(method);
+		return HttpMethod.isValidMethod(method) && (allowedMethods.isEmpty() || allowedMethods.contains(method));
 	}
 
 	/**
