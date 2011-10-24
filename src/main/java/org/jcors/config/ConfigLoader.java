@@ -59,9 +59,10 @@ public class ConfigLoader {
 		InputStream is = null;
 
 		try {
-			ClassLoader classLoader = ConfigLoader.class.getClassLoader();
+			
+			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 			is = classLoader.getResourceAsStream(fileName);
-			return is == null ? null : is;
+			return is;
 
 		} catch (Exception ex) {
 
