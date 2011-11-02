@@ -6,10 +6,12 @@ import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
 import org.apache.log4j.Logger;
 import org.jcors.util.Constraint;
+import org.xml.sax.SAXException;
 
 /**
  * Class responsible for loading configurations
@@ -59,7 +61,7 @@ public class ConfigLoader {
 		InputStream is = null;
 
 		try {
-			
+
 			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 			is = classLoader.getResourceAsStream(fileName);
 			return is;
@@ -83,13 +85,9 @@ public class ConfigLoader {
 		try {
 
 			JAXBContext context = JAXBContext.newInstance(ConfigBuilder.class);
+			
 			Unmarshaller unmarshaller = context.createUnmarshaller();
-
-			InputStream schemaFileStream = findFileInClasspath(CONFIG_SCHEMA_FILE_NAME);
-			Constraint.ensureNotNull(schemaFileStream, "JCors configuration schema not found");
-
-			SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-			unmarshaller.setSchema(schemaFactory.newSchema(new StreamSource(schemaFileStream)));
+			unmarshaller.setSchema(loadXmlSchema());
 
 			ConfigBuilder configBuilder = (ConfigBuilder) unmarshaller.unmarshal(fileStream);
 			Constraint.ensureNotNull(configBuilder, "It was not possible to get a valid configuration builder instance");
@@ -102,6 +100,21 @@ public class ConfigLoader {
 			return null;
 		}
 
+	}
+
+	/**
+	 * Loads the XML validation schema from the classpath
+	 * 
+	 * @return
+	 * @throws SAXException
+	 */
+	private static Schema loadXmlSchema() throws SAXException {
+
+		InputStream schemaFileStream = findFileInClasspath(CONFIG_SCHEMA_FILE_NAME);
+		Constraint.ensureNotNull(schemaFileStream, "JCors configuration schema not found");
+
+		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+		return schemaFactory.newSchema(new StreamSource(schemaFileStream));
 	}
 
 }
