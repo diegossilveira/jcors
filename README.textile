@@ -18,34 +18,34 @@ h3. Using JCors
 
 Just add this to your __web.xml__ file:
 
-@<filter>@
-   @<filter-name>CorsFilter</filter-name>@
-   @<filter-class>org.jcors.web.CorsEnablingFilter</filter-class>@
-@</filter>@
+bc.. <filter>
+   <filter-name>CorsFilter</filter-name>
+   <filter-class>org.jcors.web.CorsEnablingFilter</filter-class>
+</filter>
 	
-@<filter-mapping>@
-   @<filter-name>CorsFilter</filter-name>@
-   @<url-pattern>/resource/*</url-pattern>@
-@</filter-mapping>@
+<filter-mapping>
+   <filter-name>CorsFilter</filter-name>
+   <url-pattern>/resource/*</url-pattern>
+</filter-mapping>
 
-And optionally, add a file __jcors.xml__ to your classpath
+p. And optionally, add a file __jcors.xml__ to your classpath
 Check the __jcors-sample.xml__ "here":https://github.com/diegossilveira/jcors/blob/master/src/main/resources/jcors-sample.xml
 
 h3. And Maven?
 
 Now you can get JCors from Maven Central Repository:
 
-@<dependency>@
-   @<groupId>org.jcors</groupId>@
-   @<artifactId>jcors </artifactId>@
-   @<version>1.1</version>@
-@</dependency>@
+bc.. <dependency>
+   <groupId>org.jcors</groupId>
+   <artifactId>jcors</artifactId>
+   <version>1.1</version>
+</dependency>
 
 h3. Help Me!
 
 There are some things to improve on this project, can you help me?
 
- * Improve JUnit tests
+ * Improve unit tests
  * Servlet 3.0 API support
  * Request Headers validation
 
