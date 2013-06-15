@@ -38,7 +38,7 @@ Now you can get JCors from Maven Central Repository:
 bc.. <dependency>
    <groupId>org.jcors</groupId>
    <artifactId>jcors</artifactId>
-   <version>1.1</version>
+   <version>1.2</version>
 </dependency>
 
 h3. Help Me!
